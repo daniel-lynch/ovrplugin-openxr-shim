@@ -1,0 +1,36 @@
+# Copyrighted / proprietary — NEVER commit.
+# dump/   = dumped APK, libUE4.so, libOVRPlugin.so, OBB, save data
+# ue_src/ = Epic UnrealEngine + Meta OVR_Plugin.h source (EULA / proprietary)
+# backup/ = user save data
+dump/
+ue_src/
+backup/
+ghidra_proj/
+
+# Raw reverse-engineering output (derivative of Meta's proprietary binary).
+# Keep only the plain symbol-NAME lists (the public OVRPlugin API surface).
+analysis/*
+!analysis/all_exports.txt
+!analysis/shim_surface.txt
+
+# Large third-party toolchains (fetched locally, not redistributed)
+# (re-include our own desktop OpenXR harness source)
+tools/*
+!tools/desktop-harness/
+
+# Vendored third-party headers (fetched by scripts/fetch_deps.sh)
+shim/third_party/
+
+# Build artifacts / secrets
+shim/build/
+build/
+packaging/out/
+packaging/work/
+packaging/libs/
+*.so
+*.apk
+*.o
+*.keystore
+*.zip
+*.tar.gz
+save_backup/
