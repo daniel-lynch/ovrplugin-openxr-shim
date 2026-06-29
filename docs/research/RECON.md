@@ -10,6 +10,12 @@ Legal posture: dump-your-own only. We extract from hardware *you own* running a
 copy *you own*. **Nothing here gets redistributed** — only patches/shims you
 author, applied by people who dump their own copy. Same model as ReXGlue.
 
+> **Editor's note (2026-06):** this is a historical recon document. It explores an
+> entitlement-**stub** approach in a few places (§4, the wiring summary, the decision tree)
+> that was **not** carried into the project — entitlement handling is out of scope and the
+> shim ships **no circumvention code** (see the README's scope section). Those passages are
+> kept as a record of the original investigation, not as instructions.
+
 ---
 
 ## 0. Prereqs (do while the Quest charges)
@@ -114,12 +120,6 @@ libUE4.so --(NEEDED + ovr_* Platform SDK, 132 refs)--> libovrplatformloader.so  
 - => **Stub the ovr_* Platform SDK** (libovrplatformloader.so) — entitlement/account,
   just return OK; don't reimplement.
 
-> *Editor's note (2026-06): the entitlement-stub approach described here and elsewhere in this
-> doc (the §4 table, the wiring summary above, the decision tree below) was **not** carried
-> into the project. Entitlement handling is out of scope and the shim ships no circumvention
-> code — see the README's scope section. These passages are kept as a record of the original
-> recon, not as instructions.*
-
 > If you want to double-check beyond filename presence, extract and inspect
 > imports of `libUE4.so` (it may dynamically link the runtime):
 > ```bash
@@ -189,9 +189,6 @@ device:             Quest 2 serial <redacted-serial> (codename hollywood)
 - **OpenXR** → next phase: map which Meta OpenXR vendor extensions the binary
   requests, plan the OpenXR→Steam-Frame-runtime shim + entitlement stub.
   This is the "weekend-of-shimming" branch.
-  > *Editor's note (2026-06): the "entitlement stub" floated here was later removed from the
-  > project. Entitlement handling is out of scope and the shim ships no circumvention code —
-  > see the README's scope section. This line is left as a record of the original plan.*
 - **VrApi** → next phase: scope a VrApi reimplementation/translation shim
   (much larger). Reassess whether the project is worth it vs. waiting/UEVR.
 - **Either way** → `libovrplatformloader.so` entitlement bypass is a required
