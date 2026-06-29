@@ -12,7 +12,7 @@ CC="$TC/bin/aarch64-linux-android29-clang"   # API 29 (Quest is Android 10+; app
 [ -x "$CC" ] || { echo "NDK clang not found at $CC"; exit 1; }
 mkdir -p "$SHIM/build/arm64"
 
-"$CC" -std=c11 -Wall -shared -fPIC -fvisibility=hidden \
+"$CC" -std=c11 -Wall -O2 -shared -fPIC -fvisibility=hidden \
    -I"$SHIM/include" -I"$SHIM/third_party/openxr" -I"$SHIM/third_party/vulkan" \
    "$SHIM/src/stubs.c" "$SHIM/src/core.c" "$SHIM/src/xr_runtime.c" \
    "$SHIM/src/vk_session.c" "$SHIM/src/layers.c" "$SHIM/src/android_init.c" "$SHIM/src/xr_input.c" \
